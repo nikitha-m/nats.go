@@ -730,6 +730,7 @@ func (s *pullSubscription) handleStatusMsg(msg *nats.Msg, msgErr error) (error, 
 		if errors.Is(msgErr, ErrConsumerLeadershipChanged) {
 			s.pending.msgCount = 0
 			s.pending.byteCount = 0
+			s.checkPending()
 		}
 		return nil, msgErr
 	}
